@@ -1,0 +1,44 @@
+.product-image {
+  width: 100%;
+  max-height: 50vh;
+  object-fit: cover;
+}
+
+.title {
+  margin: 10px 0px 0px 0px;
+  font-size: 30px;
+}
+
+.description {
+  font-weight: 600;
+  font-size: 14px;
+  color: rgb(73, 73, 73);
+  line-height: 1.6;
+  margin-bottom: 7em;
+}
+
+.price {
+  margin: 0px;
+}
+
+.back {
+  padding: 1.5em;
+  font-size: 20px;
+  position: absolute;
+}
+
+.add-to-cart {
+  position: fixed;
+  bottom: 2%;
+  width: calc(100vw - 3em);
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-color: black;
+  border-radius: 5rem;
+  padding: 1.1em 1.5em;
+  color: rgb(224, 224, 224);
+  letter-spacing: 0.8px;
+  font-size: 14px;
+  border: none;
+}

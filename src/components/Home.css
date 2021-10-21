@@ -1,0 +1,11 @@
+.home-title {
+  margin: 1em 0em 0em 0em;
+  font-weight: bolder;
+  color: #2e2e2e;
+}
+
+.home-sub {
+  font-weight: 500;
+  margin: 0px;
+  color: #6d6d6d;
+}

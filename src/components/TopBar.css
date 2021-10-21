@@ -1,0 +1,40 @@
+.top-wrapper {
+  width: 100%;
+  position: relative;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.top-text {
+  margin: 0;
+  font-weight: 600;
+  font-size: 16px;
+  color: #707070;
+}
+
+.top-input {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  border-radius: 50%;
+  border: 0px;
+  background-color: #ebeff1;
+  font-weight: 400;
+  font-family: "Open Sans", sans-serif;
+  color: #707070;
+  letter-spacing: 1px;
+}
+
+.top-input:focus {
+  outline: none;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  font-size: 22px;
+  opacity: 0.2;
+}

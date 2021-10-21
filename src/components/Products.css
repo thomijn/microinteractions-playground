@@ -1,0 +1,27 @@
+.products-wrapper {
+  display: flex;
+  margin-bottom: 3em;
+}
+
+.thumbnail {
+  object-fit: cover;
+  min-height: 230px;
+  width: 100%;
+  border-radius: 0.5rem;
+}
+
+.price {
+  color: #464646;
+  font-size: 14px;
+  font-weight: 900;
+}
+.heart {
+  font-size: 22px;
+}
+
+.info {
+  font-weight: 600;
+  color: #727272;
+  font-size: 12px;
+  margin: 2px 0px 10px 0px;
+}
