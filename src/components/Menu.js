@@ -17,17 +17,22 @@ const menuItems = [
 const Menu = () => {
   const location = useLocation();
   const history = useHistory();
-  const { shoppingCart } = useStore();
+  const { shoppingCart, microAnimations } = useStore();
   const animationControls = useAnimation();
 
   useEffect(() => {
-    animationControls.start({ y: [-5, -30, -5] });
-  }, [shoppingCart, animationControls]);
+    microAnimations &&
+      animationControls.start({ y: [-5, -30, -5], transition: { delay: 0.1 } });
+  }, [shoppingCart, animationControls, microAnimations]);
 
   return (
     <motion.div
       initial={false}
-      transition={{ stiffness: 500, mass: 1, damping: 60 }}
+      transition={
+        microAnimations
+          ? { stiffness: 500, mass: 1, damping: 60 }
+          : { duration: 0 }
+      }
       animate={{ y: location.pathname.includes("product") ? "100%" : "0%" }}
       className="menu-wrapper"
     >
@@ -42,7 +47,7 @@ const Menu = () => {
             {item.icon}
             {location.pathname === item.link && (
               <motion.div
-                layoutId="underline"
+                layoutId={microAnimations ? "underline" : false}
                 className="underline"
                 initial={false}
                 transition={spring}

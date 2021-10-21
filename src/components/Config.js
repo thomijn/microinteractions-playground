@@ -1,6 +1,7 @@
 import { Grid } from "@mui/material";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { useStore } from "../store";
 import "./Config.css";
 
 const colors = [
@@ -17,25 +18,31 @@ export const spring = {
 };
 
 const Config = () => {
+  const { microAnimations } = useStore();
+
+  const attributes = microAnimations
+    ? {
+        transition: { delay: 0.2, ...spring },
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+      }
+    : {};
+
   return (
-    <motion.div
-      transition={{ delay: 0.2 }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-    >
+    <motion.div {...attributes}>
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          <Color />
+          <Color microAnimations={microAnimations} />
         </Grid>
         <Grid item xs={6}>
-          <Size />
+          <Size microAnimations={microAnimations} />
         </Grid>
       </Grid>
     </motion.div>
   );
 };
 
-const Color = () => {
+const Color = ({ microAnimations }) => {
   const [selectedColor, setSelectedColor] = useState(colors[0]);
 
   return (
@@ -54,7 +61,7 @@ const Color = () => {
               <motion.div
                 transition={spring}
                 initial={false}
-                layoutId="outline-color"
+                layoutId={microAnimations ? "outline-color" : false}
                 className="outline-color"
               />
             )}
@@ -65,7 +72,7 @@ const Color = () => {
   );
 };
 
-const Size = () => {
+const Size = ({ microAnimations }) => {
   const [selectedSize, setSelectedSize] = useState(sizes[0]);
 
   return (
@@ -73,7 +80,7 @@ const Size = () => {
       <p className="color-text">
         Size <span className="color-text-selected">{selectedSize}</span>
       </p>
-      <Grid container justifyContent="space-around">
+      <Grid container justifyContent="space-between">
         {sizes.map((size) => (
           <Grid
             item
@@ -83,6 +90,7 @@ const Size = () => {
             className="size-item"
           >
             <motion.h5
+              transition={{ duration: microAnimations ? 0.2 : 0 }}
               animate={{
                 color: selectedSize === size ? "#fff" : "#000",
               }}
@@ -93,7 +101,7 @@ const Size = () => {
               <motion.div
                 transition={spring}
                 initial={false}
-                layoutId="outline-size"
+                layoutId={microAnimations ? "outline-size" : false}
                 className="outline-size"
               />
             )}

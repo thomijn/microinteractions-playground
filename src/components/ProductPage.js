@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { FiChevronLeft } from "react-icons/fi";
 import { useHistory, useParams } from "react-router";
 import { useStore } from "../store";
-import Config from "./Config";
+import Config, { spring } from "./Config";
 
 import "./ProductPage.css";
 
@@ -41,15 +41,21 @@ const ProductPage = () => {
   const history = useHistory();
   const params = useParams();
   const prod = products.find((pro) => pro.id === parseInt(params.id));
-  console.log(prod);
+  const { microAnimations } = useStore();
+
+  const attributes = microAnimations
+    ? {
+        transition: { delay: 0.2, ...spring },
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+      }
+    : {};
 
   return (
     <>
       <div>
         <motion.div
-          transition={{ delay: 0.2 }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          {...attributes}
           onClick={() => history.push("/")}
           className="back"
         >
@@ -61,29 +67,14 @@ const ProductPage = () => {
           src={prod.image}
         />
         <div style={{ padding: "0em 1.5em" }}>
-          <motion.h2
-            transition={{ delay: 0.2 }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="title"
-          >
+          <motion.h2 {...attributes} className="title">
             {prod.name}
           </motion.h2>
-          <motion.h5
-            transition={{ delay: 0.2 }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="price"
-          >
+          <motion.h5 {...attributes} className="price">
             {prod.price}
           </motion.h5>
           <Config />
-          <motion.h5
-            transition={{ delay: 0.2 }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="description"
-          >
+          <motion.h5 {...attributes} className="description">
             Short V-neck button-up cardigan long <br /> sleeves bubble
           </motion.h5>
         </div>

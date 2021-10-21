@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { AnimateSharedLayout, motion } from "framer-motion";
 import "./Categories.css";
+import { useStore } from "../store";
+import { spring } from "./Config";
 
 const categories = ["Jeans", "Tank Tops", "Jumpers"];
 
@@ -21,16 +23,25 @@ const Categories = () => {
 };
 
 const Category = ({ cat, selected, setSelected }) => {
+  const { microAnimations } = useStore();
+
+  const attributes = microAnimations
+    ? {
+        transition: { delay: 0.2, ...spring },
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+      }
+    : {};
+
   return (
     <>
       <motion.div
-        transition={{ delay: 0.2 }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        {...attributes}
         onClick={() => setSelected(cat)}
         className="category"
       >
         <motion.p
+          transition={{ duration: microAnimations ? 0.2 : 0 }}
           initial={{ margin: 0 }}
           animate={{
             zIndex: 10,
@@ -44,7 +55,7 @@ const Category = ({ cat, selected, setSelected }) => {
             initial={{ borderRadius: 50 }}
             style={{ scale: 1.1 }}
             className="selected"
-            layoutId="selected"
+            layoutId={microAnimations ? "selected" : false}
           />
         )}
       </motion.div>

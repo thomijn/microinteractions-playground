@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { FiSearch, FiX } from "react-icons/fi";
+import { useStore } from "../store";
 import { spring } from "./Config";
 
 import "./TopBar.css";
@@ -21,19 +22,26 @@ const variants = {
 const TopBar = () => {
   const [openInput, setOpenInput] = useState(false);
   const [search, setSearch] = useState("");
+  const { microAnimations } = useStore();
+
+  const attributes = microAnimations
+    ? {
+        transition: { delay: 0.2, ...spring },
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+      }
+    : {};
 
   return (
-    <motion.div
-      transition={{ delay: 0.2, ...spring }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="top-wrapper"
-    >
-      <motion.h5 animate={{ opacity: openInput ? 0 : 1 }} className="top-text">
+    <motion.div {...attributes} className="top-wrapper">
+      <motion.h5
+        animate={microAnimations && { opacity: openInput ? 0 : 1 }}
+        className="top-text"
+      >
         Hi, Alisa Wilson
       </motion.h5>
       <motion.input
-        transition={{ ...spring }}
+        transition={microAnimations ? { ...spring } : { duration: 0 }}
         variants={variants}
         animate={openInput ? "open" : "closed"}
         onClick={() => setOpenInput(true)}
