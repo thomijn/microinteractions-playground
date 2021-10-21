@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import { motion } from "framer-motion";
-import { useState } from "react";
 import { useStore } from "../store";
+
 import "./Toggle.css";
 
 const Toggle = () => {
